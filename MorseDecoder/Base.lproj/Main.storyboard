@@ -35,16 +35,25 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="97.666666666666671" height="34.333333333333336"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="."/>
+                                                        <connections>
+                                                            <action selector="dotButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BgE-Rm-uv0"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPN-G5-gBZ">
                                                         <rect key="frame" x="107.66666666666666" y="0.0" width="97.666666666666657" height="34.333333333333336"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="-"/>
+                                                        <connections>
+                                                            <action selector="dashButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LKb-Ne-2dG"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-35-SZ8">
                                                         <rect key="frame" x="215.33333333333334" y="0.0" width="97.666666666666657" height="34.333333333333336"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="_"/>
+                                                        <connections>
+                                                            <action selector="spaceButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cz5-gr-bKJ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -53,7 +62,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Reset"/>
                                                 <connections>
-                                                    <action selector="resetDecoderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiB-Xj-Dd5"/>
+                                                    <action selector="resetDecoderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6pa-hv-Tpc"/>
                                                 </connections>
                                             </button>
                                         </subviews>

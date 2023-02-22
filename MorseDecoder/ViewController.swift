@@ -28,15 +28,25 @@ class ViewController: UIViewController {
     }
     
     private func configureRx() {
-        self.vm.outSubj
+        self.vm.outDecodedText
             .subscribe(onNext: { [weak self] in self?.decodedTextLabel.text = $0 })
             .disposed(by: self.disposeBag)
     }
     
     //MARK: - IBActions
+    @IBAction private func dotButton(_ sender: Any) {
+        self.vm.inDot.onNext(())
+    }
+    @IBAction private func dashButton(_ sender: Any) {
+        self.vm.inDash.onNext(())
+    }
+    @IBAction private func spaceButton(_ sender: Any) {
+        self.vm.inSpace.onNext(())
+    }
     @IBAction private func resetDecoderButton(_ sender: Any) {
-        self.vm.inSubj.onNext(())
+        self.vm.reset.onNext(())
     }
     
+   
 }
 

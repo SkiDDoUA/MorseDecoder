@@ -10,25 +10,95 @@ import RxSwift
 
 final class ViewModel {
     //MARK: - Private properties
-    private var elementsCollection = ["a", "B", "C"]
+    private var morseBuffer = ""
     
     //MARK: - DisposeBag
     private let disposeBag = DisposeBag()
     
     //MARK: - Subjects
-    let inSubj = PublishSubject<Void>()
-    let outSubj = PublishSubject<String>()
-    
+    let inDot = PublishSubject<Void>()
+    let inDash = PublishSubject<Void>()
+    let inSpace = PublishSubject<Void>()
+    let reset = PublishSubject<Void>()
+    let outDecodedText = PublishSubject<String>()
+
     //MARK: - Init
     init() {
-        inSubj
+        inDot
             .subscribe(
                 onNext: { [weak self] in
                     guard let self else { return }
-                    let stringToOut = self.elementsCollection.randomElement() ?? ""
-                    self.outSubj.onNext(stringToOut)
+                    self.morseBuffer += "."
+                }
+            )
+            .disposed(by: self.disposeBag)
+        
+        inDash
+            .subscribe(
+                onNext: { [weak self] in
+                    guard let self else { return }
+                    self.morseBuffer += "-"
+                }
+            )
+            .disposed(by: self.disposeBag)
+        
+        inSpace
+            .subscribe(
+                onNext: { [weak self] in
+                    guard let self else { return }
+                    self.morseBuffer += "_"
+                }
+            )
+            .disposed(by: self.disposeBag)
+        
+        reset
+            .subscribe(
+                onNext: { [weak self] in
+                    guard let self else { return }
+                    let outputText = self.decodeStringToMorse(self.morseBuffer)
+                    self.outDecodedText.onNext(outputText)
                 }
             )
             .disposed(by: self.disposeBag)
     }
+    
+    //MARK: - Morse Decoder
+    func decodeStringToMorse(_ input: String) -> String {
+        let symbolsArray = input.components(separatedBy: "_")
+        var returnString = ""
+        
+        do {
+            try symbolsArray.forEach{ returnString += try convertLetterToMorse($0) }
+        } catch {
+            print("BIG ERROR")
+        }
+        
+        return returnString
+    }
+    
+    func convertLetterToMorse(_ input: String) throws -> String {
+        var returnChar = ""
+        
+        if let key = MorseVariables.morseDictionary.first(where: { $0.value == input })?.key {
+            returnChar = key
+        } else {
+            print("ERROR")
+            throw MorseErrors.wrongInput
+        }
+        
+        return returnChar
+    }
+    
 }
+
+//init() {
+//    inSubj
+//        .subscribe(
+//            onNext: { [weak self] in
+//                guard let self else { return }
+//                let stringToOut = self.elementsCollection.randomElement() ?? ""
+//                self.outSubj.onNext(stringToOut)
+//            }
+//        )
+//        .disposed(by: self.disposeBag)
+//}

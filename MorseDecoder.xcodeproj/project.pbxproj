@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AA90DA729A64C7200D121F0 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA90DA629A64C7200D121F0 /* Variables.swift */; };
 		3AB4311829A607680082BCF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4311729A607680082BCF6 /* AppDelegate.swift */; };
 		3AB4311A29A607680082BCF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4311929A607680082BCF6 /* SceneDelegate.swift */; };
 		3AB4311C29A607680082BCF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4311B29A607680082BCF6 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		188312F2E0064A7739BBA4A4 /* Pods-MorseDecoder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorseDecoder.debug.xcconfig"; path = "Target Support Files/Pods-MorseDecoder/Pods-MorseDecoder.debug.xcconfig"; sourceTree = "<group>"; };
 		2012AD61A4493AABE5D751BD /* Pods_MorseDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MorseDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AA90DA629A64C7200D121F0 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		3AB4311429A607680082BCF6 /* MorseDecoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseDecoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB4311729A607680082BCF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AB4311929A607680082BCF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +60,6 @@
 				188312F2E0064A7739BBA4A4 /* Pods-MorseDecoder.debug.xcconfig */,
 				C425C197F06DE09A60658DB5 /* Pods-MorseDecoder.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -91,6 +92,7 @@
 				3AB4312229A607690082BCF6 /* LaunchScreen.storyboard */,
 				3AB4312529A607690082BCF6 /* Info.plist */,
 				3AB4312B29A608CD0082BCF6 /* ViewModel.swift */,
+				3AA90DA629A64C7200D121F0 /* Variables.swift */,
 			);
 			path = MorseDecoder;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 				3AB4311829A607680082BCF6 /* AppDelegate.swift in Sources */,
 				3AB4312C29A608CD0082BCF6 /* ViewModel.swift in Sources */,
 				3AB4311A29A607680082BCF6 /* SceneDelegate.swift in Sources */,
+				3AA90DA729A64C7200D121F0 /* Variables.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
