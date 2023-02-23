@@ -11,6 +11,7 @@ import RxSwift
 class ViewController: UIViewController {
     //MARK: - IBOutlets
     @IBOutlet private weak var decodedTextLabel: UITextField!
+    @IBOutlet private weak var errorLabel: UILabel!
     
     //MARK: - Private Properties
     private let vm = ViewModel()
@@ -29,7 +30,18 @@ class ViewController: UIViewController {
     
     private func configureRx() {
         self.vm.outDecodedText
-            .subscribe(onNext: { [weak self] in self?.decodedTextLabel.text = $0 })
+            .subscribe(
+                onNext: { [weak self] in
+                    print("YES")
+                    self?.decodedTextLabel.text = $0
+                    self?.errorLabel.isHidden = true
+//
+                },
+                onError: { [weak self] _ in
+                    print("NO")
+                    self?.decodedTextLabel.text = ""
+                    self?.errorLabel.isHidden = false }
+            )
             .disposed(by: self.disposeBag)
     }
     

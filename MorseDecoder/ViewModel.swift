@@ -29,6 +29,12 @@ final class ViewModel {
                 onNext: { [weak self] in
                     guard let self else { return }
                     self.morseBuffer += "."
+                    let outputText = self.decodeStringToMorse(self.morseBuffer)
+                    if outputText == "" {
+                        self.outDecodedText.onError(MorseErrors.wrongInput)
+                    } else {
+                        self.outDecodedText.onNext(outputText)
+                    }
                 }
             )
             .disposed(by: self.disposeBag)
@@ -38,6 +44,15 @@ final class ViewModel {
                 onNext: { [weak self] in
                     guard let self else { return }
                     self.morseBuffer += "-"
+                    let outputText = self.decodeStringToMorse(self.morseBuffer)
+                    print("SS: \(outputText)")
+                    if outputText == "" {
+                        print("HELPPP")
+                        self.outDecodedText.onError(MorseErrors.wrongInput)
+                    } else {
+                        self.outDecodedText.onNext(outputText)
+                    }
+                    
                 }
             )
             .disposed(by: self.disposeBag)
@@ -55,8 +70,8 @@ final class ViewModel {
             .subscribe(
                 onNext: { [weak self] in
                     guard let self else { return }
-                    let outputText = self.decodeStringToMorse(self.morseBuffer)
-                    self.outDecodedText.onNext(outputText)
+                    self.morseBuffer = ""
+                    self.outDecodedText.onNext("")
                 }
             )
             .disposed(by: self.disposeBag)
@@ -66,39 +81,21 @@ final class ViewModel {
     func decodeStringToMorse(_ input: String) -> String {
         let symbolsArray = input.components(separatedBy: "_")
         var returnString = ""
-        
-        do {
-            try symbolsArray.forEach{ returnString += try convertLetterToMorse($0) }
-        } catch {
-            print("BIG ERROR")
-        }
+        print(input)
+
+        symbolsArray.forEach{ returnString += convertLetterToMorse($0) }
         
         return returnString
     }
     
-    func convertLetterToMorse(_ input: String) throws -> String {
+    func convertLetterToMorse(_ input: String) -> String {
         var returnChar = ""
         
         if let key = MorseVariables.morseDictionary.first(where: { $0.value == input })?.key {
             returnChar = key
-        } else {
-            print("ERROR")
-            throw MorseErrors.wrongInput
         }
         
         return returnChar
     }
     
 }
-
-//init() {
-//    inSubj
-//        .subscribe(
-//            onNext: { [weak self] in
-//                guard let self else { return }
-//                let stringToOut = self.elementsCollection.randomElement() ?? ""
-//                self.outSubj.onNext(stringToOut)
-//            }
-//        )
-//        .disposed(by: self.disposeBag)
-//}
