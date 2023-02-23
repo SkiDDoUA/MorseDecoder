@@ -30,11 +30,7 @@ final class ViewModel {
                     guard let self else { return }
                     self.morseBuffer += "."
                     let outputText = self.decodeStringToMorse(self.morseBuffer)
-                    if outputText == "" {
-                        self.outDecodedText.onError(MorseErrors.wrongInput)
-                    } else {
-                        self.outDecodedText.onNext(outputText)
-                    }
+                    self.outDecodedText.onNext(outputText)
                 }
             )
             .disposed(by: self.disposeBag)
@@ -45,14 +41,7 @@ final class ViewModel {
                     guard let self else { return }
                     self.morseBuffer += "-"
                     let outputText = self.decodeStringToMorse(self.morseBuffer)
-                    print("SS: \(outputText)")
-                    if outputText == "" {
-                        print("HELPPP")
-                        self.outDecodedText.onError(MorseErrors.wrongInput)
-                    } else {
-                        self.outDecodedText.onNext(outputText)
-                    }
-                    
+                    self.outDecodedText.onNext(outputText)
                 }
             )
             .disposed(by: self.disposeBag)
@@ -81,18 +70,23 @@ final class ViewModel {
     func decodeStringToMorse(_ input: String) -> String {
         let symbolsArray = input.components(separatedBy: "_")
         var returnString = ""
-        print(input)
-
-        symbolsArray.forEach{ returnString += convertLetterToMorse($0) }
+        
+        do {
+            try symbolsArray.forEach{ returnString += try convertLetterToMorse($0) }
+        } catch {
+            returnString = "ERROR"
+        }
         
         return returnString
     }
     
-    func convertLetterToMorse(_ input: String) -> String {
+    func convertLetterToMorse(_ input: String) throws -> String {
         var returnChar = ""
         
         if let key = MorseVariables.morseDictionary.first(where: { $0.value == input })?.key {
             returnChar = key
+        } else {
+            throw MorseErrors.wrongInput
         }
         
         return returnChar

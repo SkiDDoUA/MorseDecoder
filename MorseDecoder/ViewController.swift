@@ -31,16 +31,15 @@ class ViewController: UIViewController {
     private func configureRx() {
         self.vm.outDecodedText
             .subscribe(
-                onNext: { [weak self] in
-                    print("YES")
-                    self?.decodedTextLabel.text = $0
-                    self?.errorLabel.isHidden = true
-//
-                },
-                onError: { [weak self] _ in
-                    print("NO")
-                    self?.decodedTextLabel.text = ""
-                    self?.errorLabel.isHidden = false }
+                onNext: { [weak self] words in
+                    if words == "ERROR" {
+                        self?.decodedTextLabel.text = ""
+                        self?.errorLabel.isHidden = false
+                    } else {
+                        self?.decodedTextLabel.text = words
+                        self?.errorLabel.isHidden = true
+                    }
+                }
             )
             .disposed(by: self.disposeBag)
     }
